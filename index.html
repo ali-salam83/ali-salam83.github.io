@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" id="html">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لایتنر</title>
+    <link rel="stylesheet" href="./css & js/style.css">
+</head>
+<body onkeypress="if(event.keyCode==13){event.preventDefault()}" class="scrollbar" style="overflow: hidden; height: 100vh; margin: 0;" oncontextmenu="event.preventDefault()" onload="lo()" onkeydown="controlligthner(event)">
+    <div id="generelmuno" style="overflow: auto; overflow-x: hidden;" class="scrollbar">
+        <button id="category" onclick="category()" style="color: #fff; border: 0px solid; background-color: transparent; cursor: pointer; font-size: 20px;"><span style="display: inline-block; ">فیلتر کردن تمرین</span></button><br/>
+        <hr style="margin: 10px; border: 1px solid rgba(255, 255, 255, 0.568);">
+        <span style="color: #fff; padding: 15px 0 15px 5px; display: inline-block;">تلفظ خودکار لغت</span><div class="switch" style="position: absolute; left: 14px; top: 90px;"><label><input id="speekato" type="checkbox"><span class="slider round" onclick="if(document.getElementById('speekato').checked==true){localStorage.setItem('speekword','0');}else{localStorage.setItem('speekword','1');};"></span></label></div><br/>
+        <hr style="margin: 10px; border: 1px solid rgba(255, 255, 255, 0.568);">
+        <p style="font-size: 18px; color: #fff;">انتخاب کردن فونت برنامه:</p>
+        <button id="font1" style="border: 3px solid #111;" class="buttons color w-100" onclick="localStorage.setItem('font','2');lo();">میخک</button>
+        <button id="font2" style="margin-top: 5px; border: 3px solid #111;" class="buttons color w-100" onclick="localStorage.setItem('font','1');lo();">دیروز</button>
+        <hr style="margin: 10px; border: 1px solid rgba(255, 255, 255, 0.568);">
+        <p style="font-size: 18px; color: #fff;">انتخاب کردن بک‌گراند برنامه. <br/>بک‌گراند شماره:</p>
+        <div style="display: inline-flex; width: 100%;">
+            <button style="border: 3px solid #111; width: 25%;" class="buttons color br-r" onclick="localStorage.setItem('background',1);lo();">یک</button>
+            <button style="border: 3px solid #111; width: 25%;" class="buttons color br-c" onclick="localStorage.setItem('background',2);lo();">دو</button>
+            <button style="border: 3px solid #111; width: 25%;" class="buttons color br-c" onclick="localStorage.setItem('background',3);lo();">سه</button>
+            <button style="border: 3px solid #111; width: 25%;" class="buttons color br-l" onclick="localStorage.setItem('background',4);lo();">چهار</button>
+        </div>
+        <hr style="margin: 10px; border: 1px solid rgba(255, 255, 255, 0.568);">
+        <p style="font-size: 18px; color: #fff;">انتخاب کردن رنگ برنامه:</p>
+        <div style="display: inline-flex; width: 100%;">
+            <button class="buttons br-r" style="border: 3px solid #111; width: 25%; background-color: rgb(76 76 76);" onclick="localStorage.setItem('color','dark');lo();">‌ ‌</button>
+            <button class="buttons br-c" style="border: 3px solid #111; width: 25%; background-color: rgb(33 165 59);" onclick="localStorage.setItem('color','green');lo();"></button>
+            <button class="buttons br-c" style="border: 3px solid #111; width: 25%; background-color: rgb(43 83 167);" onclick="localStorage.setItem('color','blue');lo();"></button>
+            <button class="buttons br-c" style="border: 3px solid #111; width: 25%; background-color: rgb(236 236 236);" onclick="localStorage.setItem('color','white');lo();"></button>
+            <button class="buttons br-l" style="border: 3px solid #111; width: 25%; background-color: rgb(151, 103, 0);" onclick="localStorage.setItem('color','red');lo();"></button>
+        </div>
+        <hr style="margin: 10px; border: 1px solid rgba(255, 255, 255, 0.568);">
+        <p style="font-size: 18px; color: #fff;" id="speedspeecks">سرعت تلفظ:</p>
+        <input type="range" id="speedspeeck" class="sliders" min="0.5" max="1.5" step="0.25" value="1" oninput="speedspeeck(this)">
+        <button style="margin-top: 5px; border: 3px solid #111;" class="buttons color w-100" onclick="document.getElementById('speedspeeck').value='1'; localStorage.setItem('speedspeeck','1');document.getElementById('speedspeecks').innerHTML='سرعت تلفظ: '+1+' برابر';">reset</button>
+        <hr style="margin: 10px; border: 1px solid rgba(255, 255, 255, 0.568);">
+        <button style="margin-top: 5px; border: 3px solid #111;" class="buttons color w-100" onclick="backup();">پشتیبان‌گیری</button>
+        <button style="margin-top: 5px; border: 3px solid #111;" class="buttons color w-100" onclick="sw();">وارد کردن</button>
+        <button style="margin-top: 5px; border: 3px solid #111;" class="buttons color w-100" onclick="CLR();">بازنشانی برنامه</button>
+        <hr style="margin: 10px; border: 1px solid rgba(255, 255, 255, 0.568);">
+        <button style="margin-top: 5px; border: 3px solid #111;" class="buttons color w-100" <!--onclick="learn();"--> >آموزش کار کردن با لایتنر</button>
+    </div>
+    <div id="tit" style="border: 3px solid #000; font-size: 30px; width: 100%; height: 60px; display: none; z-index: 1000; position: absolute; top: 0; right: 0; text-align: center;" class="color"></div>
+    <div style="width: 100%; height: 100%; z-index: 400; display: none; position: absolute; top: 0; right: 0;" id="bl" onclick="document.getElementById('generelmuno').style.display='none';document.getElementById('bl').style.display='none';"></div>
+    <div id="bottonscontrollword" style="padding: 4px; width: 100%; justify-content: center; display: none; padding: 10px; z-index: 2000; position: absolute; top: 0;">
+        <button class="color1" style="padding:1px 10px; border: 0px solid; font-size: 20px;" id="numbercheckbox">تعداد انتخاب ها:</button>
+        <button id="button01" class="color1" style="cursor: pointer; padding:1px 3px; border: 0px solid; border-right: 2px solid #111; font-size: 20px;" onclick="selectall()"><img class="imgbutton"><span class="textbutton">انتخاب همه</span></button>
+        <button id="button02" class="color1" style="cursor: pointer; padding:1px 3px; border: 0px solid; border-right: 2px solid #111; font-size: 20px;" onclick="deletwords()"><img class="imgbutton"><span class="textbutton">حذف</span></button>
+        <button id="button03" class="color1" style="cursor: pointer; padding:1px 3px; border: 0px solid; border-right: 2px solid #111; font-size: 20px;" onclick="changecategory()"><img class="imgbutton"><span class="textbutton">تغییر دسته</span></button>
+        <button id="button05" class="color1" style="cursor: pointer; padding:1px 3px; border: 0px solid; border-right: 2px solid #111; font-size: 20px;" onclick="starchange()"><img class="imgbutton"><span class="textbutton">ستاره‌دار بودن</span></button>
+        <button id="button04" class="color1" style="cursor: pointer; padding:1px 3px; border: 0px solid; border-right: 2px solid #111; font-size: 20px;" onclick="changedi()"><img class="imgbutton"><span class="textbutton">تغییر وضعیت</span></button>
+    </div>
+    <header id="head" style="padding: 10px;">
+        <div style=" display: inline-flex; width: 100%; max-width: 100%; overflow: auto;">
+            <button id="setting" onclick="generelmuno()" class="color1 buttons br-r" style="cursor: pointer; font-size: 20px; padding: 0 10px;"><img class="im" style="height: 30px; padding: 2px 7px; padding-right: 0;" id="Settings"><span class="botmq xy sp" style="display: inline-block;">منو</span></button>
+            <button id="dailyWorkout" onclick="dailypract()" class="color1 buttons br-c" style="cursor: pointer; font-size: 20px; padding: 0 10px;"><img class="im" style="height: 30px; padding: 2px 7px; padding-right: 0;" id="dailyWorkoutimg"><span class="botmq xy sp" style="display: inline-block;">تمرین روزانه</span></button>
+            <button id="dictunary1" onclick="dictunary()" class="color1 buttons br-c" style="cursor: pointer; font-size: 20px; padding: 0 10px;"><img class="im" style="height: 30px; padding: 2px 7px; padding-right: 0;" id="dictunary"><span class="botmq xy sp" style="display: inline-block;">دیکشنری</span></button>
+            <button id="moror" onclick="moroor()" class="color1 buttons br-l" style="cursor: pointer; font-size: 20px; padding: 0 10px;"><img class="im" style= "height: 30px; padding: 2px 7px; padding-right: 0;" id="mororimg"><span class="botmq xy sp" style="display: inline-block;">مرور</span></button>
+            
+            <button id="addligth" onclick="addligth()" class="color1 buttons br-r" style="margin-right: auto; cursor: pointer; font-size: 20px; padding: 0 10px;"><img class="im" style="height: 30px; padding: 2px 7px; padding-right: 0;" id="addligthimg"><span class="botmq sp" style="display: inline-block;">اضافه‌کردن</span></button>
+            <button id="word" onclick="document.getElementById('loadbar').style.display='block';word()" class="color1 buttons br-l" style="cursor: pointer; font-size: 20px; padding: 0 10px;"><img class="im" style="height: 30px; padding: 2px 7px; padding-right: 0;" id="words"><span class="botmq sp" style="display: inline-block;">مشاهده لغات</span></button>
+        </div>
+    </header>
+    <div style="position: absolute; top:50%; left: 50%; transform: translate(-50%,-50%); width: 500px; margin: auto; border: 1px solid #111; text-align: center; padding: 20px;" id="Practice">
+        <div style="border: 3px solid #111; display: inline-flex; width: 100%; background-color: rgb(125 125 125); border-radius:15px; color: rgb(255, 255, 255); margin-bottom: 30px;" class="mobilmarginn">
+            <div style="display: inline-block; width: 33.33%;">
+                <span class="section1" id="information1"></span><br>
+                <span class="section1">لغات مانده</span>
+            </div>
+            <div style="display: inline-block; width: 33.33%;">
+                <span class="section1" id="information2"></span><br>
+                <span class="section1">درحال تمرین</span>
+            </div>
+            <div style="display: inline-block; width: 33.33%;">
+                <span class="section1" id="information3"></span><br>
+                <span class="section1">لغات یادگرفته</span>                    
+            </div>
+        </div>
+        <div>
+            <p class="scrollbar" style="font-size: 50px;" id="calame"></p>
+            <p class="scrollbar" style="font-size: 25px;" id="qoestion">?</p>
+            <div style="margin: 35px 0 10px 0; display: inline-flex; width: 100%;" class="mobilmargin">
+                <button class="color1" style="border: 3px solid #111; border-left:0; width: 33.33%; font-size: 15px; cursor: pointer; border-radius:0 15px 15px 0; padding: 7px;" onclick="speed()">تلفظ</button><br>
+                <button class="color1" style="border: 3px solid #111; border-right: 1px solid #111; border-left:1px solid #111; width: 33.33%; font-size: 15px; cursor: pointer; border-radius:0;" onclick="main()">معادل</button><br>
+                <button class="color1" style="border: 3px solid #111; border-right: 0; width: 33.33%; font-size: 15px; cursor: pointer; border-radius: 15px 0 0 15px;" onclick="inform()">توضیحات</button>
+            </div>    
+        </div>
+        <div style="margin:0 0 10px 0; display: inline-flex; width: 100%;">
+            <button onclick="condition0()" style="border: 3px solid #111; border-left:0; cursor: pointer; width: 33.33%; font-size: 20px; border-radius:0 15px 15px 0; padding: 7px;" class="color1 section2"><img id="btnI1" style="width: 25%;"><br>نمی‌دونم</button>
+            <button onclick="condition1()" style="border: 3px solid #111; border-right: 1px solid #111; border-left:1px solid #111; cursor: pointer; width: 33.33%; font-size: 20px; border-radius:0; padding: 7px;" class="color1 section2"><img id="btnI2" style="width: 25%;"><br>تمرین بیشتر</button>
+            <button onclick="condition2()" style="border: 3px solid #111; border-right: 0; cursor: pointer; width: 33.33%; font-size: 20px; border-radius: 15px 0 0 15px; padding: 7px;" class="color1 section2"><img id="btnI3" style="width: 25%;"><br>یادگرفتم</button>
+        </div>
+    </div>
+        <div id="loadbar" style="display: none;">
+            <div id="blurloading"></div>
+            <div id="loading" class="color" >
+                <p style="text-align: center;">لطفا صبر کنید...</p>
+                <div class="load-3" style="width: 100%; text-align: center;">
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="clickreightbl" style="display: none; width: 100%; height: 100%; position: absolute; top: 0; right: 0; z-index: 2900;" onclick="document.getElementById('clickreight').style.display='none';document.getElementById('clickreightbl').style.display='none';"></div>
+    <div id="clickreight" style="display: none; padding: 10px; border: 2px solid #111;">
+        <div class="inclickright" onclick="document.getElementById('clickreight').style.display='none';document.getElementById('clickreightbl').style.display='none';wordspk2();">تلفظ</div>
+        <div class="inclickright" onclick="document.getElementById('clickreight').style.display='none';document.getElementById('clickreightbl').style.display='none';editword();">ویرایش</div>
+        <div class="inclickright" onclick="document.getElementById('clickreight').style.display='none';document.getElementById('clickreightbl').style.display='none';changecatword();"></div>
+        <div class="inclickright" onclick="document.getElementById('clickreight').style.display='none';document.getElementById('clickreightbl').style.display='none';changeen();"></div>
+        <div class="inclickright" onclick="document.getElementById('clickreight').style.display='none';document.getElementById('clickreightbl').style.display='none';changefa();"></div>
+        <div class="inclickright" style="border-bottom: 0px solid #000;" onclick="document.getElementById('clickreight').style.display='none';document.getElementById('clickreightbl').style.display='none';delword();">حذف</div>
+    </div>
+    <script src="./css & js/app.js"></script>
+</body>
+</html>
